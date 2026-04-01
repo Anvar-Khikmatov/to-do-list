@@ -1,0 +1,55 @@
+*,
+*:before,
+*:after{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Basic modal styling */
+dialog {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+/* Style the background overlay */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.temp-form{
+    margin: 5rem 0;
+}
+
+.paraent-projects{
+  background-color: aquamarine;
+}
+
+.project-element{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 70px;
+  border: 1px solid black;
+  background-color: antiquewhite;
+  margin: 2rem 0;
+}
+
+.display-selected{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  border: 1px solid black;
+  height: 100px;
+  width: 200px;
+}
+
+.selected-text{
+  font-size: 1.5rem;
+  text-align: center;
+}
