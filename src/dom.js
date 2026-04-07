@@ -1,54 +1,47 @@
-import { createTasks } from "./tasks"
-import { dataBase } from "./logic"
-import { storeTasks } from "./logic"
-import { storeProjectName } from "./logic"
-import { getCurrentProject } from "./logic.js"
-import { activeProject } from "./logic"
-import { updateActiveProject } from "./logic"
-import { deleteProject, getTaskIndex, deleteTasks, setStorage } from "./logic"
+import { createTasks } from "./tasks.js"
+import { dataBase, getCurrentProject, activeProject, storeTasks, storeProjectName, editProject, deleteProject, deleteTasks } from "./logic.js"
+// export { createProjectElement }
 
 
-const addProjectBtn = document.querySelector('.add-project')
-const modal = document.getElementById('my-modal')
-const closeModal = document.getElementById('close-modal')
-const createProjectBtn = document.getElementById('create-project')
-const createTaskBtn = document.getElementById('create-task')
+const addProjectBtn = document.querySelector('.sidebar__btn--add')
+const projectModal = document.getElementById('project-modal')
+const closeModal = document.querySelector('.close-modal')
+// const createProjectBtn = document.getElementById('create-project')
+
 
 
 
 let editMode = false
 let elementToEdit = null
-let projectNameID = null
-const taskWindowContainer = createElement('div', 'task-window-container', null)
-document.body.append(taskWindowContainer)
+
+// const taskWindowContainer = createElement('div', 'task-window-container', null)
+// const parentProjectContainer = createElement('div', 'parent-projects', null)
+// document.body.append(taskWindowContainer, parentProjectContainer);
 
 
 addProjectBtn.addEventListener('click', () => {
-    
+    projectModal.showModal()
 })
 
 closeModal.addEventListener('click', () => {
-   
+    projectModal.close()
 })
 
 
 
-createProjectBtn.addEventListener('click', () => {
-    const projectName = document.getElementById('project-input').value
-    if(editMode) { 
-        editProject(projectName)
-        return
-    }
-    localStorage.setItem('projectInput', projectName)
-    storeProjectName(projectName)
-    createProjectElement(projectName)
-    displayAllTasks(activeProject)
-    setStorage("key", projectName)   
-    console.log(dataBase);
-      
-})
+// createProjectBtn.addEventListener('click', () => {
+//     const projectName = document.getElementById('project-input').value
+//     if(editMode) { 
+//         editProject(projectName)
+//         editProjectElement(projectName)
+//         return   }
+//         storeProjectName(projectName)
+//         createProjectElement(projectName)
+//         displayAllTasks(activeProject)   
+//         console.log(dataBase);
+// })
 
-
+/*
 createTaskBtn.addEventListener('click', () => {
     const taskTitle = document.getElementById('title').value
     const taskDescription = document.getElementById('description').value
@@ -60,12 +53,11 @@ createTaskBtn.addEventListener('click', () => {
     displayAllTasks(activeProject)    
 })
 
-const parentProjectContainer = document.createElement('div')
-parentProjectContainer.className = "paraent-projects"
-document.body.append(parentProjectContainer);
+
 
 parentProjectContainer.addEventListener('click', (e) => {
     if(e.target === parentProjectContainer) return
+
     if(e.target.classList.contains('project-element')){
        getCurrentProject(e.target.dataset.name)
        displayCurrentSelected(e.target.dataset.name)
@@ -73,7 +65,7 @@ parentProjectContainer.addEventListener('click', (e) => {
     }
     if(e.target.classList.contains('delete-project-btn')){
         deleteElelement(e.target.closest('.project-element'))
-        deleteProject(e.target.closest('.project-element').childNodes[0].textContent)
+        deleteProject(e.target.closest('.project-element').dataset.name)
         displayAllTasks(null)       
     }
     if (e.target.classList.contains('edit-project-btn')) {
@@ -102,8 +94,17 @@ function createProjectElement(name){
     const deleteProjectBtn = createElement('button', 'delete-project-btn', "Delete")
     const editProjectBtn = createElement('button', 'edit-project-btn', "Edit")
     project.append(editProjectBtn, deleteProjectBtn)
-    parentProjectContainer.append(project)
+    parentProjectContainer.append(project)  
 }
+
+
+function editProjectElement(projectName){
+    elementToEdit.dataset.name = projectName
+    elementToEdit.childNodes[0].textContent = projectName
+    elementToEdit = null
+    editMode = false 
+}
+
 
 function createElement(elementType, className, elementText){
     const element = document.createElement(elementType)
@@ -113,18 +114,10 @@ function createElement(elementType, className, elementText){
 }
 
 function deleteElelement(element){
-    element.remove()
+    element.remove() 
 }
 
-function editProject(editedProjectName){
-    dataBase[editedProjectName] = dataBase[activeProject]
-    delete dataBase[activeProject]
-    updateActiveProject(editedProjectName)
-    elementToEdit.dataset.name = editedProjectName
-    elementToEdit.childNodes[0].textContent = editedProjectName
-    elementToEdit = null
-    editMode = false     
-}
+
 
 
 
@@ -145,12 +138,8 @@ function displayCurrentSelected(selected){
 
 
     function displayAllTasks(showTasks){
-        taskWindowContainer.innerHTML = "";
         taskWindowContainer.dataset.window = showTasks;
-        taskWindowContainer.innerHTML = ""
-        // if(taskWindowContainer.dataset.window === null) {
-        // taskWindowContainer.innerHTML = ""
-        // }        
+        taskWindowContainer.innerHTML = ""      
         if(showTasks) dataBase[showTasks].forEach((element, index) => {
             const tasksWindow = createElement('div', 'display-tasks', null)
             tasksWindow.dataset.index = index;
@@ -165,4 +154,9 @@ function displayCurrentSelected(selected){
             taskWindowContainer.append(tasksWindow)
         })  
     }
+*/
+
+document.body.querySelector('.toggle-btn').addEventListener('click', () => {
+    document.querySelector('.container').classList.toggle('sidebar-closed');
+}) 
 

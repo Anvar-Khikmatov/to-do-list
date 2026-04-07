@@ -1,39 +1,49 @@
-export const dataBase = {}
-export let activeProject = null;
+export { dataBase, activeProject, getCurrentProject, storeProjectName, storeTasks, editProject, deleteProject, deleteTasks, setStorage, getStorage } 
+
+const dataBase = {}
+let activeProject = null
         
-
-export function updateActiveProject(editedProjectName){
-    activeProject = editedProjectName
-}
-
-export function getCurrentProject(currentProject){
+function getCurrentProject(currentProject){
     activeProject = currentProject;
+    setStorage("dataBase", dataBase)   
 }
 
-
-export function storeProjectName(projectTitle){
+function storeProjectName(projectTitle){
     activeProject = projectTitle
     dataBase[activeProject] = []
+    setStorage("dataBase", dataBase)   
 }
 
-export function storeTasks(tasks){
+function storeTasks(tasks){
     dataBase[activeProject].push(tasks)
+    setStorage("dataBase", dataBase)   
 }
 
-export function deleteProject(projectElement){
+function editProject(editedProjectName){
+    dataBase[editedProjectName] = dataBase[activeProject]
+    delete dataBase[activeProject]
+    activeProject = editedProjectName
+    setStorage("dataBase", dataBase)       
+}
+
+
+
+function deleteProject(projectElement){
     delete dataBase[projectElement]
+    setStorage("dataBase", dataBase)   
 }
 
 
-export function deleteTasks(taskIndex){
+function deleteTasks(taskIndex){
     dataBase[activeProject].splice(taskIndex, 1)
+    setStorage("dataBase", dataBase)   
 }
 
-export function setStorage(key, value) {
+function setStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value))
 }
 
-export function getStorage(key) {
+function getStorage(key) {
     const data = localStorage.getItem(key)
     return data ? JSON.parse(data) : {}
 }

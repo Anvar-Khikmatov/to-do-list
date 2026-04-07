@@ -3,22 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
     <title>ToDo-List</title>
 </head>
 <body>
     
-    <button class="add-project">Add project</button>
-     <!-- <dialog id="my-modal"> -->
-      <div class="temp-form"> 
-        <form>
-            <input type="text" id="project-input" placeholder="Project Title">
-        </form>
+    <header>
+        <div class="toggle-btn" >
+            <svg viewBox="0 0 124 124" fill="none" stroke="white" stroke-width="15" stroke-linecap="round">
+                <line x1="12" y1="18" x2="112" y2="18" />
+                <line x1="12" y1="62" x2="112" y2="62" />
+                <line x1="12" y1="106" x2="112" y2="106" />
+            </svg>
+        </div>
 
-        <button id="close-modal">close</button>
-        <button id="create-project">create</button>
-    <!-- </dialog> -->
-</div>
-    <!-- <dialog id="task-modal"> -->
+        <h1>Todo List</h1>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <div class="sidebar-container"> 
+                <div class="sidebar__section">
+                    <button class=""> <i data-lucide="boxes"></i> All</button>
+                    <button class=""> <i data-lucide="calendar-days"></i> Upcoming </button>
+                    <button class=""> <i data-lucide="file-exclamation-point"></i> Important</button>
+                    <button class=""> <i data-lucide="calendar-check"></i> Completed</button>
+                </div>
+
+                <div class="sidebar__section">
+                    <button class="sidebar__btn--add"> <i data-lucide="plus"></i>  Add Projects  </button>
+                </div>
+            </div>   
+        </nav>
+        
+
+        <main>
+            hello
+        </main>    
+    </div>
+    
+
+
+
+
+
+
+
+    <dialog class="modal" id="project-modal">
+        <div class="modal-wrapper">
+        <form class="modal__form">
+            <input class="modal__input" type="text" id="project-input" placeholder="Project Title" required>
+        </form>
+        <div class="modal__actions">
+            <button class="modal__btn modal_btn--close close-modal">Close</button>
+            <button class="modal__btn modal_btn--create" id="create-project">Create</button>
+        </div>
+        </div>
+    </dialog>
+
+<!--
+    <dialog id="task-modal">
         <form>
             <input type="text" id="title" placeholder="Task Title">
             <input type="text" id="description" placeholder="Task Description">
@@ -33,8 +78,14 @@
 
         <button id="close-task-modal">close</button>
         <button id="create-task">create</button>
-    <!-- </dialog> -->
+    </dialog> -->
 
 
+
+  
+        <script type="module" src="./dom.js"></script>
+        <script>
+            lucide.createIcons();
+        </script> 
 </body>
 </html>
