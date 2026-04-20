@@ -2,6 +2,8 @@
 
 A project-based todo list app built with vanilla JavaScript, CSS, and Webpack.
 
+[Live Demo](https://anvar-khikmatov.github.io/to-do-list/)
+
 ## Features
 
 - Create, edit, and delete projects
@@ -20,6 +22,8 @@ A project-based todo list app built with vanilla JavaScript, CSS, and Webpack.
 - Webpack + webpack-dev-server
 - html-webpack-plugin
 - mini-css-extract-plugin
+
+
 
 ## Project Structure
 
