@@ -1,91 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css">
     <title>ToDo-List</title>
 </head>
+
 <body>
-    
     <header>
-        <div class="toggle-btn" >
+        <div class="toggle-btn">
             <svg viewBox="0 0 124 124" fill="none" stroke="white" stroke-width="15" stroke-linecap="round">
                 <line x1="12" y1="18" x2="112" y2="18" />
                 <line x1="12" y1="62" x2="112" y2="62" />
                 <line x1="12" y1="106" x2="112" y2="106" />
             </svg>
-        </div>
+        </div>  
 
         <h1>Todo List</h1>
     </header>
 
     <div class="container">
         <nav class="sidebar">
-            <div class="sidebar-container"> 
-                <div class="sidebar__section">
-                    <button class=""> <i data-lucide="boxes"></i> All</button>
-                    <button class=""> <i data-lucide="calendar-days"></i> Upcoming </button>
-                    <button class=""> <i data-lucide="file-exclamation-point"></i> Important</button>
-                    <button class=""> <i data-lucide="calendar-check"></i> Completed</button>
+            <div class="sidebar-container">
+                <div class="sidebar__filter">
+                    <button class="sidebar__btn" id="all_btn"> <i data-lucide="boxes"></i> All</button>
+                    <button class="sidebar__btn" id="upcoming_btn"> <i data-lucide="calendar-days"></i> Upcoming</button>
+                    <button class="sidebar__btn" id="important_btn"> <i data-lucide="file-exclamation-point"></i> Important</button>
+                    <button class="sidebar__btn" id="completed_btn"> <i data-lucide="calendar-check"></i> Completed</button>
                 </div>
 
-                <div class="sidebar__section">
-                    <button class="sidebar__btn--add"> <i data-lucide="plus"></i>  Add Projects  </button>
+                <div class="sidebar__projects">
+                    <button class="sidebar__btn" id="add-project"><i data-lucide="plus"></i> Add Projects </button>
+                    <!-- Dynamically project btns go here -->
                 </div>
-            </div>   
+            </div>
         </nav>
-        
 
-        <main>
-            hello
-        </main>    
+        <main> 
+            <div class="main-wrapper">
+                <div class="main__header">
+                    <h1 class="main__header--title"></h1>
+                    <div class="main__header--meta">
+                        <div class="main__header--task-count"><span class="js-task-count"></span> <span class="tasks_word">tasks</span> </div>
+                        <button class="main__header--add-btn">+ Add Tasks</button>
+                    </div>  
+                </div>
+
+                <div class="main__section">
+                    <!-- Dynamically tasks go here -->
+                </div>  
+            </div>
+        </main>
     </div>
+
     
 
+    <dialog class="modal-project" id="project-modal">
+        <div class="modal-wrapper" id="project-form" novalidate>
+            <form class="modal__form">
+                <input class="modal__input" type="text" id="project-input" placeholder="Project Title" required minlength="3" maxlength="80" />
+                <span id="input-error" class="modal__error"> </span>
 
-
-
-
-
-
-    <dialog class="modal" id="project-modal">
-        <div class="modal-wrapper">
-        <form class="modal__form">
-            <input class="modal__input" type="text" id="project-input" placeholder="Project Title" required>
-        </form>
-        <div class="modal__actions">
-            <button class="modal__btn modal_btn--close close-modal">Close</button>
-            <button class="modal__btn modal_btn--create" id="create-project">Create</button>
-        </div>
+                <div class="modal__actions">
+                    <button type="reset" class="modal__btn modal_btn--close close-modal">
+                        Close
+                    </button>
+                    <button type="submit" class="modal__btn modal_btn--create" id="create-project">
+                        <!-- Create -->
+                    </button>
+                </div>
+            </form>
         </div>
     </dialog>
 
-<!--
-    <dialog id="task-modal">
-        <form>
-            <input type="text" id="title" placeholder="Task Title">
-            <input type="text" id="description" placeholder="Task Description">
-            <input type="date" id="date" selected>
-            <select id="priority"> Select priority
-                <option value=""  hidden >Select priority</option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>        
-            </select>
-        </form>
+    
+    <dialog class="modal-task" id="task-modal">
+        <div class="task-modal__wrapper" id="task-form" novalidate>
+            <form class="modal-task__form">
+                <input class="modal-task__title" type="text" id="task-title" placeholder="Task Title" required minlength="3" maxlength="80">
+                <span id="task-input-error" class="task-modal__error"> </span>
+                <input class="modal-task__description" type="text" id="task-description" placeholder="Task Description">
 
-        <button id="close-task-modal">close</button>
-        <button id="create-task">create</button>
-    </dialog> -->
+                <div class="modal-task__action-field">   
+                    <input class="modal-task__date" type="date" id="task-date" selected>
+                    <select class="modal-task__priority" id="task-priority"> Select priority
+                        <option value=""  hidden >Select priority</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>        
+                    </select>
+                </div>     
 
+                <div class="modal-task__actions">
+                    <button type="reset" class="modal-task__btn modal-task__btn--close" id="close-task-modal">Close</button>
+                    <button type="submit" class="modal-task__btn modal-task__btn--create" id="create-task">Create</button>
+                </div>
+            </form>
+        </div>  
+    </dialog>
 
-
-  
-        <script type="module" src="./dom.js"></script>
-        <script>
-            lucide.createIcons();
-        </script> 
+    
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
+
 </html>
